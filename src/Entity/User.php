@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class User implements AdvancedUserInterface, \Serializable
 {
@@ -36,6 +37,14 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="creationDate", type="datetime")
      */
     private $creationDate;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function onPrePersistSetDefaultFields()
+    {
+        $this->creationDate = new \DateTime('now');
+    }
 
     public function getId()
     {

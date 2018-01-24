@@ -1,14 +1,14 @@
 <?php
-// src/Entity/Link.php
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\LinkRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Link
+class Category
 {
     /**
      * @ORM\Id
@@ -18,9 +18,9 @@ class Link
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=1023, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $url;
+    private $name;
 
     /**
      * @ORM\Column(name="creationDate", type="datetime")
@@ -40,14 +40,14 @@ class Link
         return $this->id;
     }
 
-    public function getUrl()
+    public function getName()
     {
-        return $this->url;
+        return $this->name;
     }
 
-    public function setUrl($url)
+    public function setName($name)
     {
-        $this->url = $url;
+        $this->name = $name;
     }
 
     public function getCreationDate()
@@ -59,5 +59,4 @@ class Link
     {
         $this->creationDate = $creationDate;
     }
-
 }
