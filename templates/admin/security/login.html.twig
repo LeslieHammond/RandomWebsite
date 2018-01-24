@@ -1,0 +1,81 @@
+{# templates/admin/security/login.html.twig #}
+
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+<!-- MAIN CONTENT -->
+<div id="content" class="container">
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 well no-padding">
+            <form action="{{ path('admin_security_login') }}" class="smart-form client-form" method="post">
+                <header>
+                    Sign In
+                </header>
+
+                {#{% if error %}
+                <div class="alert alert-danger fade-in">
+                    <button class="close" data-dismiss="alert">x</button>
+                    <i class="fa fa-fw fa-times"></i>
+                    <strong>Error!</strong>
+                    Unknown credentials.
+                </div>    
+                {% endif %}#}
+
+                <fieldset>
+
+                    <section>
+                        <label class="label" for="_username">Username</label>
+                        <label class="input{% if error %} state-error{% endif %}">
+                            <i class="icon-append fa fa-user"></i>
+                            <input type="text" name="_username" id="_username" value="{{ lastUsername }}" required="required"{% if error %} aria-required="true" aria-describedby="_username-error" aria-invalid="true"{% endif %}>
+                            <b class="tooltip tooltip-top-left"><i class="fa fa-user txt-color-teal"></i> Enter username</b></label>
+                        </label>    
+                    </section>
+
+                    <section>
+                        <label class="label" for="_password">Password</label>
+                        <label class="input{% if error %} state-error{% endif %}">
+                            <i class="icon-append fa fa-lock"></i>
+                            <input type="password" name="_password" id="_password" required="required"{% if error %} aria-required="true" aria-describedby="_password-error" aria-invalid="true"{% endif %}>
+                            <b class="tooltip tooltip-top-left"><i class="fa fa-lock txt-color-teal"></i> Enter password</b></label>
+                        </label>
+                        {% if error %}<em id="_password-error" class="invalid">Unknown credentials</em>{% endif %}
+                    </section>
+
+                    <section>
+                        <label class="checkbox">
+                            <input type="checkbox" name="remember" checked="">
+                            <i></i>Stay signed in</label>
+                    </section>
+
+                    {#<section>
+                        <label class="label">Username</label>
+                        <label class="input"> <i class="icon-append fa fa-user"></i>
+                            <input type="text" name="_username" value="{{ lastUsername }}">
+                            <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Enter username</b></label>
+                    </section>
+
+                    <section>
+                        <label class="label">Password</label>
+                        <label class="input"> <i class="icon-append fa fa-lock"></i>
+                            <input type="password" name="_password">
+                            <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter password</b> </label>
+                    </section>#}
+
+                    {#<section>
+                        <label class="checkbox">
+                            <input type="checkbox" name="remember" checked="">
+                            <i></i>Stay signed in</label>
+                    </section>#}
+                </fieldset>
+                <footer>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </footer>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+{% endblock %}

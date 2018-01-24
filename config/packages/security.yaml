@@ -1,0 +1,43 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+
+    providers:
+        database:
+            entity:
+                class: App\Entity\User
+                property: username
+    firewalls:
+        admin:
+            anonymous: ~
+            pattern:  ^/admin
+            provider: database
+            form_login:
+                check_path:          admin_security_login
+                default_target_path: admin
+                login_path:          admin_security_login
+                use_referer:         true
+            logout:
+                path:   /admin/logout
+                target: /admin/login
+            remember_me:
+                secret:   '%env(APP_SECRET)%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /admin
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: ~
+
+            # activate different ways to authenticate
+
+            # http_basic: ~
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+            # https://symfony.com/doc/current/security/form_login_setup.html
+    access_control:
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }
