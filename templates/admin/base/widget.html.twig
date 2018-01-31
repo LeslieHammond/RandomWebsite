@@ -1,0 +1,20 @@
+{# admin/base/widget.html.twig #}
+<!-- Widget ID -->
+<div id="wid-id-{{ id }}" class="jarviswidget" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-load="{{ path(path) }}">
+    <header>
+        <h2>
+            {{ title }}
+        </h2>
+    </header>
+    <!-- widget div -->
+    <div>
+        
+        <!-- widget content -->
+        <div class="widget-body{% if noPadding is defined %} no-padding{% endif %}">
+            <p>Loading content...</p> <i class="fa fa-refresh fa-spin"></i>
+        </div>
+        <!-- end widget content -->
+    </div>
+    <!-- end widget div-->
+</div>
+<!-- end widget -->

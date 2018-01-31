@@ -1,0 +1,15 @@
+{# admin/dashboard/base.html.twig #}
+
+{% extends 'admin/base.html.twig' %}
+
+{% block breadcrumbs %}
+<li>{{ include('admin/dashboard/title.html.twig') }}</li>
+{% endblock %}
+
+{% block icon %}
+{{ include('admin/dashboard/icon.html.twig') }}
+{% endblock %}
+
+{% block pageHeader %}
+{{ include('admin/dashboard/title.html.twig') }}
+{% endblock %}

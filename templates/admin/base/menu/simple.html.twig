@@ -1,0 +1,7 @@
+{# admin/base/menu/simple.html.twig #}
+
+<li{% if app.request.get('_route') == path %} class="active"{% endif %}>
+    <a href="{{ path(path) }}" title="{{ include(title) }}">
+        <i class="fa fa-lg fa-fw {{ include(icon) }}"></i> <span class="menu-item-parent">{{ include(title) }}</span>
+    </a>
+</li>

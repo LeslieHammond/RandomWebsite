@@ -14,8 +14,18 @@ class LinkType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url', UrlType::class)
-            ->add('submit', SubmitType::class)
+            ->add('url', UrlType::class, [
+                'attr' => [
+                    'class'       => 'form-control',
+                    'placeholder' => 'Link...'
+                ]
+            ])
+            ->add('submit', SubmitType::class, [
+                'attr'  => [
+                    'class' => 'btn btn-default btn-primary'
+                ],
+                'label' => 'Add link'
+            ])
         ;
     }
 

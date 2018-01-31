@@ -1,0 +1,30 @@
+{# admin/base/menu.html.twig #}
+
+{{ include('admin/base/menu/simple.html.twig', {
+    'icon': 'admin/dashboard/icon.html.twig',
+    'path': 'admin_dashboard_index',
+    'title': 'admin/dashboard/title.html.twig'
+}) }}
+{{ include('admin/base/menu/simple.html.twig', {
+    'icon': 'admin/links/icon.html.twig',
+    'path': 'admin_links_index',
+    'title': 'admin/links/title.html.twig'
+}) }}
+{#<li{% if 'admin_links' in app.request.get('_route') %} class="active"{% endif %}>
+    <a href="#" title="{{ include('admin/links/title.html.twig') }}">
+        <i class="fa fa-lg fa-fw {{ include('admin/links/icon.html.twig') }}"></i> <span class="menu-item-parent">{{ include('admin/links/title.html.twig') }}</span>
+        <b class="collapse-sign"><em class="fa fa-plus-square-o"></em></b>
+    </a>
+    <ul style="display: block">
+        {{ include('admin/base/menu/simple.html.twig', {
+            'icon': 'admin/links/add/icon.html.twig',
+            'path': 'admin_links_add',
+            'title': 'admin/links/add/title.html.twig'
+        }) }}
+        {{ include('admin/base/menu/simple.html.twig', {
+            'icon': 'admin/links/list/icon.html.twig',
+            'path': 'admin_links_list',
+            'title': 'admin/links/list/title.html.twig'
+        }) }}
+    </ul>
+</li>#}

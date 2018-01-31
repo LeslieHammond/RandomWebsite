@@ -1,14 +1,15 @@
 <?php
-// src/Entity/Link.php
+
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\LinkRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ProviderRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Link
+class Provider
 {
     /**
      * @ORM\Id
@@ -18,9 +19,14 @@ class Link
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=1023, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $url;
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $domain;
 
     /**
      * @ORM\Column(name="creationDate", type="datetime")
@@ -28,10 +34,9 @@ class Link
     private $creationDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Provider", inversedBy="link")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Link", mappedBy="provider")
      */
-    private $provider;
+    private $link;
 
     /**
      * @ORM\PrePersist
@@ -41,19 +46,34 @@ class Link
         $this->creationDate = new \DateTime('now');
     }
 
+    public function __construct()
+    {
+        $this->link = new ArrayCollection();
+    }
+
     public function getId()
     {
         return $this->id;
     }
 
-    public function getUrl()
+    public function getName()
     {
-        return $this->url;
+        return $this->name;
     }
 
-    public function setUrl($url)
+    public function setName($name)
     {
-        $this->url = $url;
+        $this->name = $name;
+    }
+
+    public function getDomain()
+    {
+        return $this->domain;
+    }
+
+    public function setDomain($domain)
+    {
+        $this->domain = $domain;
     }
 
     public function getCreationDate()
@@ -66,14 +86,9 @@ class Link
         $this->creationDate = $creationDate;
     }
 
-    public function getProvider(): Provider
+    public function getLink()
     {
-        return $this->provider;
-    }
-
-    public function setProvider(Provider $provider)
-    {
-        $this->provider = $provider;
+        return $this->link;
     }
 
 }

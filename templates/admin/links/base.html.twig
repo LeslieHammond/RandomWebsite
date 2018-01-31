@@ -1,0 +1,15 @@
+{# admin/links/base.html.twig #}
+
+{% extends 'admin/base.html.twig' %}
+
+{% block breadcrumbs %}
+<li>{{ include('admin/links/title.html.twig') }}</li>
+{% endblock %}
+
+{% block icon %}
+{{ include('admin/links/icon.html.twig') }}
+{% endblock %}
+
+{% block pageHeader %}
+{{ include('admin/links/title.html.twig') }}
+{% endblock %}
