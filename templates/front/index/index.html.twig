@@ -4,5 +4,8 @@
 
 {% block body %}
 <p>main page</p>
+<h1>{{ link.getLinkDetails().getTitle() }}</h1>
+<a href="{{ link.getLinkDetails().getPrice() }}" target="_blank">{{ link.getLinkDetails().getPrice() }}</a>
+<img src="{{ link.getLinkDetails().getImage() }}">
 <p><a href="{{ path('front_addLink') }}">add link</a></p>
 {% endblock %}

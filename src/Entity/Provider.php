@@ -39,6 +39,11 @@ class Provider
     private $link;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ProviderCrawler", mappedBy="provider")
+     */
+    private $providerCrawler;
+
+    /**
      * @ORM\PrePersist
      */
     public function onPrePersistSetDefaultFields()
@@ -89,6 +94,11 @@ class Provider
     public function getLink()
     {
         return $this->link;
+    }
+
+    public function getProviderCrawler()
+    {
+        return $this->providerCrawler;
     }
 
 }

@@ -4,29 +4,11 @@
 {% for label, messages in app.flashes %}
     {% for message in messages %}
         {% if label == 'success' %}
-            $.smallBox({
-                title : "Success!",
-                content : "{{ message }}",
-                color : "#739E73",
-                //timeout: {{ timeout }},
-                iconSmall : "fa fa-check tada animated",
-            });
-        {% elseif label == 'info' %}
-            $.smallBox({
-                title : "Information!",
-                content : "{{ message }}",
-                color : "#3276B1",
-                //timeout: {{ timeout }},
-                iconSmall : "fa fa-bell swing animated",
-            });
+            flashMessage_success("{{ message }}");
+        {% elseif label == 'information' %}
+            flashMessage_information("{{ message }}");
         {% elseif label == 'danger' %}
-            $.smallBox({
-                title : "Danger!",
-                content : "{{ message }}",
-                color : "#C46A69",
-                //timeout: {{ timeout }},
-                iconSmall : "fa fa-warning flip animated",
-            });
+            flashMessage_danger("{{ message }}");
         {% endif %}
     {% endfor %}
 {% endfor %}

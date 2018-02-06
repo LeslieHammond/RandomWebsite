@@ -8,6 +8,8 @@
         "sensiolabs/security-checker": "^4.1",
         "symfony/asset": "^3.4",
         "symfony/console": "^3.4",
+        "symfony/css-selector": "^3.4",
+        "symfony/dom-crawler": "^3.4",
         "symfony/flex": "^1.0",
         "symfony/form": "^3.4",
         "symfony/framework-bundle": "^3.4",

@@ -9,7 +9,7 @@ use App\Entity\Link;
 use App\Form\LinkType;
 
 // Services
-use App\Service\FlashMessage;
+use App\Service\Links;
 
 // Dependencies
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -21,15 +21,20 @@ class IndexController extends Controller
     /**
      * @Route("/", name="front_index")
      */
-    public function index()
+    public function index(Links $links)
     {
-        return $this->render('front/index/index.html.twig');
+        $link = $links->getRandomLink();
+        //var_dump($link->getLinkDetails()->getImage());exit;
+
+        return $this->render('front/index/index.html.twig', [
+            'link' => $link
+        ]);
     }
 
     /**
      * @Route("/add_link", name="front_addLink")
      */
-    public function addLink(Request $request, FlashMessage $flashMessage)
+    public function addLink(Request $request)
     {
         $link = new Link();
         $form = $this->createForm(LinkType::class, $link);

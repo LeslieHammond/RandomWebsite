@@ -13,16 +13,37 @@ class LinkRepository extends ServiceEntityRepository
         parent::__construct($registry, Link::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function countActive()
     {
         return $this->createQueryBuilder('l')
-            ->where('l.something = :value')->setParameter('value', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
+            ->select('COUNT(1)')
+            ->where('l.active = 1')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getSingleScalarResult();
     }
-    */
+
+    public function randomLink($max)
+    {
+        $rand = rand(0, $max - 1);
+
+        return $this->createQueryBuilder('l')
+            ->where('l.active = 1')
+            ->setMaxResults(1)
+            ->setFirstResult($rand)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+    /*
+public function findBySomething($value)
+{
+return $this->createQueryBuilder('l')
+->where('l.something = :value')->setParameter('value', $value)
+->orderBy('l.id', 'ASC')
+->setMaxResults(10)
+->getQuery()
+->getResult()
+;
+}
+ */
 }

@@ -1,0 +1,71 @@
+{# admin/links/list.html.twig #}
+<table id="dt_links" class="table table-striped table-bordered table-hover" width="100%">
+    <thead>                         
+        <tr>
+            <th> Provider</th>
+            <td data-class="expand">Title </td>
+            <th data-class="expand"><i class="fa fa-fw {{ include('admin/links/icon.html.twig') }} text-muted hidden-md hidden-sm hidden-xs"></i> Link</th>
+            <th> Active</th>
+            <th data-class="expand"><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Creation Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for link in links %}
+        <tr>
+            <td>{{ link.getProvider().getName() }}</td>
+            <td><abbr title="{{ link.getLinkDetails().getTitle() }}">{{ link.getLinkDetails().getShortTitle() }}</abbr></td>
+            <td><a href="{% if 'http:' and 'https:' not in link.getUrl() %}http://{% endif %}{{ link.getUrl() }}" target="_blank">{{ link.getUrl() }}</a></td>
+            <td>{% if link.getActive() == false %}<i data-url="{{ path('admin_links_edit', {'id': link.getId(), 'status': 1}) }}" class="fa fa-fw fa-times" style="color: #f00 !important; cursor: pointer;"></i>{% else %}<i data-url="{{ path('admin_links_edit', {'id': link.getId(), 'status': 0}) }}" class="fa fa-fw fa-check" style="color: #0f0 !important; cursor: pointer;"></i>{% endif %}</td>
+            <td>{{ link.getCreationDate().format('d-m-Y H:i:s') }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<script type="text/javascript">
+        var breakpointDefinition = {
+            tablet : 1024,
+            phone : 480
+        };
+
+        $('#dt_links').dataTable({
+            "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>"+
+                "t"+
+                "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+            "autoWidth" : true,
+            "oLanguage": {
+                "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+            },
+        });
+        $('[data-url]').click(function(){
+            var url = $(this).data('url');
+            var _self = $(this);
+
+            $.ajax({
+                url: url,
+
+            }).always(function(data){
+                if(data.type == 'success'){
+                    flashMessage_success(data.message);
+                    
+                    _self.data('url', data.url);
+                    if(data.status == 1){
+                        _self.removeClass('fa-check');
+                        _self.addClass('fa-times');
+                        _self.css('color', '#f00');
+                    }else{
+                        _self.removeClass('fa-times');
+                        _self.addClass('fa-check');
+                        _self.css('color', '#0f0');
+                    }
+                }else{
+                    flashMessage_information(data.message);
+                }
+            });
+        });
+</script>
+
+{#
+<a href="{{ path('admin_links_edit', {'id': link.getId(), 'status': 1}) }}"></a>
+<a href="{{ path('admin_links_edit', {'id': link.getId(), 'status': 0}) }}"></a>
+
+#}
