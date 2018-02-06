@@ -10,6 +10,27 @@
     'path': 'admin_links_index',
     'title': 'admin/links/title.html.twig'
 }) }}
+{{ render(controller(
+    'App\\Controller\\Admin\\BaseController::providers',
+    {
+        'icon': 'admin/providers/icon.html.twig',
+        'include': [
+            {
+                'path': 'admin_providers_index',
+                'title': 'admin/providers/title.html.twig'
+            }
+        ],
+        'path': 'admin_providers',
+        'pathInfo': app.request.pathinfo,
+        'route': app.request.get('_route'),
+        'title': 'admin/providers/title.html.twig'
+    }
+)) }}
+{#{{ include('admin/base/menu/entity.html.twig', {
+    'icon': 'admin/providers/icon.html.twig',
+    'path': 'admin_providers_',
+    'title': 'admin/providers/title.html.twig'
+}) }}#}
 {#<li{% if 'admin_links' in app.request.get('_route') %} class="active"{% endif %}>
     <a href="#" title="{{ include('admin/links/title.html.twig') }}">
         <i class="fa fa-lg fa-fw {{ include('admin/links/icon.html.twig') }}"></i> <span class="menu-item-parent">{{ include('admin/links/title.html.twig') }}</span>

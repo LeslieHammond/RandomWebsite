@@ -1,0 +1,23 @@
+{# admin/provider/index.html.twig #}
+
+{% extends 'admin/providers/base.html.twig' %}
+
+{% block body %}
+<!-- row -->
+<div class="row">
+    <!-- NEW WIDGET START -->
+    <article class="col-md-12 sortable-grid ui-sortable">
+        {{ include('admin/base/widget.html.twig', {'id': 2, 'title': 'Providers list', 'path': 'admin_providers_table', 'noPadding': true}) }}
+    </article>
+    <!-- NEW WIDGET END -->
+</div>
+<!-- end row -->
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset( assets_base_urls ~ 'js/plugin/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset( assets_base_urls ~ 'js/plugin/datatables/dataTables.colVis.min.js') }}"></script>
+<script src="{{ asset( assets_base_urls ~ 'js/plugin/datatables/dataTables.tableTools.min.js') }}"></script>
+<script src="{{ asset( assets_base_urls ~ 'js/plugin/datatables/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset( assets_base_urls ~ 'js/plugin/datatable-responsive/datatables.responsive.min.js') }}"></script>
+{% endblock %}

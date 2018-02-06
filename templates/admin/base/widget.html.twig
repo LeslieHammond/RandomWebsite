@@ -1,7 +1,8 @@
 {# admin/base/widget.html.twig #}
 <!-- Widget ID -->
-<div id="wid-id-{{ id }}" class="jarviswidget" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-load="{{ path(path) }}">
+<div id="wid-id-{{ id }}" class="jarviswidget" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false"{% if path is defined %} data-widget-load="{{ path(path) }}"{% elseif pathReady is defined %} data-widget-load="{{ pathReady }}"{% endif %}>
     <header>
+        {% if icon is defined %}<span class="widget-icon"><i class="fa {{ icon }}"></i></span>{% endif %}
         <h2>
             {{ title }}
         </h2>

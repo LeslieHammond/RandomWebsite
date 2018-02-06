@@ -44,6 +44,11 @@ class Provider
     private $providerCrawler;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProviderTags", mappedBy="provider", cascade={"all"})
+     */
+    private $providerTags;
+
+    /**
      * @ORM\PrePersist
      */
     public function onPrePersistSetDefaultFields()
@@ -53,7 +58,8 @@ class Provider
 
     public function __construct()
     {
-        $this->link = new ArrayCollection();
+        $this->link         = new ArrayCollection();
+        $this->providerTags = new ArrayCollection();
     }
 
     public function getId()
@@ -99,6 +105,23 @@ class Provider
     public function getProviderCrawler()
     {
         return $this->providerCrawler;
+    }
+
+    public function getProviderTags()
+    {
+        return $this->providerTags;
+    }
+
+    public function addProviderTag(ProviderTags $providerTags)
+    {
+        $providerTags->setProvider($this);
+
+        $this->providerTags->add($providerTags);
+    }
+
+    public function removeProviderTag(ProviderTags $providerTags)
+    {
+        //$this->providerTags->add($providerTags);
     }
 
 }

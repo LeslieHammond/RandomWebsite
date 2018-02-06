@@ -1,0 +1,15 @@
+{# admin/provider/base.html.twig #}
+
+{% extends 'admin/base.html.twig' %}
+
+{% block breadcrumbs %}
+<li>{{ include('admin/providers/title.html.twig') }}</li>
+{% endblock %}
+
+{% block icon %}
+{{ include('admin/providers/icon.html.twig') }}
+{% endblock %}
+
+{% block pageHeader %}
+{{ include('admin/providers/title.html.twig') }}
+{% endblock %}

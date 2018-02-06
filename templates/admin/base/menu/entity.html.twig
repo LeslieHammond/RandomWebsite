@@ -1,0 +1,15 @@
+{# admin/base/menu/entity.html.twig #}
+
+<li{% if path in route %} class="open active"{% endif %}>
+    <a href="#">
+        <i class="fa fa-lg fa-fw {{ include(icon) }}"></i> <span class="menu-item-parent">{{ include(title) }}</span>
+    </a>
+    <ul{% if path in route %} style="display: block;"{% endif %}>
+        {% for inc in include %}
+            <li{% if path(inc.path) == pathInfo %} class="active"{% endif %}><a href="{{ path(inc.path) }}">{{ include(inc.title) }}</a></li>
+        {% endfor %}
+        {% for l in links %}
+            <li{% if l.url == pathInfo %} class="active"{% endif %}><a href="{{ l.url }}">{{ l.value }}</a></li>
+        {% endfor %}
+    </ul>
+</li>
