@@ -13,6 +13,14 @@ class LinkRepository extends ServiceEntityRepository
         parent::__construct($registry, Link::class);
     }
 
+    public function findAllValids()
+    {
+        return $this->createQueryBuilder('l')
+            ->where('l.invalid = 0')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function countActive()
     {
         return $this->createQueryBuilder('l')

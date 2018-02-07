@@ -30,7 +30,15 @@ class Links
     {
         $domain = $this->validateLink($link);
 
-        $this->insertLink($link, $domain);
+        if ($domain !== false)
+        {
+            $this->insertLink($link, $domain);
+        }
+    }
+
+    public function delete($link)
+    {
+        $this->em->remove($link);
     }
 
     private function validateLink(&$link)
@@ -48,7 +56,7 @@ class Links
         {
             $this->flashBag->add('danger', '"' . $link->getUrl() . '" ' . $e->getMessage() . '.');
 
-            return null;
+            return false;
         }
     }
 

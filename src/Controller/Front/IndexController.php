@@ -31,6 +31,14 @@ class IndexController extends Controller
     }
 
     /**
+     * @Route("/redirect_page/{id}", name="front_redirectPage");
+     */
+    public function redirectPage(Link $link)
+    {
+        return $this->redirect($link->getFullUrl());
+    }
+
+    /**
      * @Route("/add_link", name="front_addLink")
      */
     public function addLink(Request $request)

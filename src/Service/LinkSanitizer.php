@@ -58,14 +58,34 @@ class LinkSanitizer
     /* specific domain functions */
     public function amazonLink()
     {
-        //
-        $exp = explode('/dp/', $this->parsedUrl['path']);
+        $separators = ['/dp/', '/gp/product/'];
 
-        $exp2 = explode('/', $exp[1]);
+        $found = false;
+        foreach ($separators as $separator)
+        {
+            if ($found === false)
+            {
+                $exp = explode($separator, $this->parsedUrl['path']);
 
-        $url = '/dp/' . $exp2[0];
+                if (isset($exp[1]))
+                {
+                    $found = $separator;
+                }
+            }
+        }
 
-        $this->goodUrl = $this->parsedUrl['host'] . $url;
+        if ($found !== false)
+        {
+            $exp2 = explode('/', $exp[1]);
+
+            $url = $found . $exp2[0];
+
+            $this->goodUrl = $this->parsedUrl['host'] . $url;
+        }
+        else
+        {
+            throw new \Exception('unknown format');
+        }
     }
 
 }

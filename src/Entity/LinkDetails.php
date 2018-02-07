@@ -44,7 +44,7 @@ class LinkDetails
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Link", inversedBy="linkDetails")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      */
     private $link;
 

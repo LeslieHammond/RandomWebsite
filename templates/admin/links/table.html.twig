@@ -6,6 +6,7 @@
             <td data-class="expand">Title </td>
             <th data-class="expand"><i class="fa fa-fw {{ include('admin/links/icon.html.twig') }} text-muted hidden-md hidden-sm hidden-xs"></i> Link</th>
             <th> Active</th>
+            <th> Delete</th>
             <th data-class="expand"><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Creation Date</th>
         </tr>
     </thead>
@@ -15,7 +16,8 @@
             <td>{{ link.getProvider().getName() }}</td>
             <td><abbr title="{{ link.getLinkDetails().getTitle() }}">{{ link.getLinkDetails().getShortTitle() }}</abbr></td>
             <td><a href="{% if 'http:' and 'https:' not in link.getUrl() %}http://{% endif %}{{ link.getUrl() }}" target="_blank">{{ link.getUrl() }}</a></td>
-            <td>{% if link.getActive() == false %}<i data-url="{{ path('admin_links_edit', {'id': link.getId(), 'status': 1}) }}" class="fa fa-fw fa-times" style="color: #f00 !important; cursor: pointer;"></i>{% else %}<i data-url="{{ path('admin_links_edit', {'id': link.getId(), 'status': 0}) }}" class="fa fa-fw fa-check" style="color: #0f0 !important; cursor: pointer;"></i>{% endif %}</td>
+            <td class="text-center">{% if link.getActive() == false %}<i data-url="{{ path('admin_links_edit', {'id': link.getId(), 'status': 1}) }}" class="fa fa-fw fa-times" style="color: #f00 !important; cursor: pointer;"></i>{% else %}<i data-url="{{ path('admin_links_edit', {'id': link.getId(), 'status': 0}) }}" class="fa fa-fw fa-check" style="color: #0f0 !important; cursor: pointer;"></i>{% endif %}</td>
+            <td class="text-center"><i data-url="{{ path('admin_links_delete', {'id': link.getId()}) }}" class="fa fa-fw fa-trash" style="cursor: pointer;"></i></td>
             <td>{{ link.getCreationDate().format('d-m-Y H:i:s') }}</td>
         </tr>
         {% endfor %}

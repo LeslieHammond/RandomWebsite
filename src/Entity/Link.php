@@ -28,6 +28,11 @@ class Link
     private $active;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $invalid;
+
+    /**
      * @ORM\Column(name="creationDate", type="datetime")
      */
     private $creationDate;
@@ -49,6 +54,7 @@ class Link
     public function onPrePersistSetDefaultFields()
     {
         $this->active       = false;
+        $this->invalid      = false;
         $this->creationDate = new \DateTime('now');
     }
 
@@ -67,6 +73,11 @@ class Link
         $this->url = $url;
     }
 
+    public function getFullUrl()
+    {
+        return 'http://' . $this->getUrl() . $this->getProvider()->getQueryTags();
+    }
+
     public function getActive()
     {
         return $this->active;
@@ -75,6 +86,16 @@ class Link
     public function setActive($active)
     {
         $this->active = $active;
+    }
+
+    public function getInvalid()
+    {
+        return $this->invalid;
+    }
+
+    public function setInvalid($invalid)
+    {
+        $this->invalid = $invalid;
     }
 
     public function getCreationDate()

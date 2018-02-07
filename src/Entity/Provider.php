@@ -112,6 +112,24 @@ class Provider
         return $this->providerTags;
     }
 
+    public function getQueryTags()
+    {
+        $str = '';
+        foreach ($this->providerTags as $providerTags)
+        {
+            if ($str == '')
+            {
+                $str .= '?' . $providerTags->getTag() . '=' . $providerTags->getValue();
+            }
+            else
+            {
+                $str .= '&' . $providerTags->getTag() . '=' . $providerTags->getValue();
+            }
+        }
+
+        return $str;
+    }
+
     public function addProviderTag(ProviderTags $providerTags)
     {
         $providerTags->setProvider($this);

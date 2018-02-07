@@ -52,58 +52,65 @@ class LinksController extends Controller
         $repository = $this->getDoctrine()->getRepository(Link::class);
 
         return $this->render('admin/links/table.html.twig', [
-            'links' => $repository->findAll()
+            'links' => $repository->findAllValids()
         ]);
+    }
+
+    /**
+     * @Route("/admin/links/delete/{id}", name="admin_links_delete")
+     */
+    public function delete(Link $link)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $response = new JsonResponse();
+
+        $response->setData([
+            'message' => '"' . $link->getUrl() . '" deleted successfully.',
+            'type'    => 'success'
+        ]);
+
+        $link->setActive(false);
+        $link->setInvalid(true);
+
+        $em->flush();
+
+        return $response;
     }
 
     /**
      * @Route("/admin/links/edit/{id}/{status}", name="admin_links_edit")
      */
-    public function edit($id, $status, UrlGeneratorInterface $router)
+    public function edit(Link $link, $status, UrlGeneratorInterface $router)
     {
-        $link = $this->getDoctrine()
-            ->getRepository(Link::class)
-            ->find($id);
+        $em = $this->getDoctrine()->getManager();
 
-        $response = new JsonResponse();
+        $link->setActive($status);
 
-        if (empty($link))
+        $em->flush();
+
+        if ($status == 1)
         {
-            $response->setData([
-                'message' => 'No changes applied.',
-                'type'    => 'information',
-                'url'     => null
-            ]);
+            $str    = 'activated';
+            $status = 0;
         }
         else
         {
-            $em = $this->getDoctrine()->getManager();
-
-            $link->setActive($status);
-
-            $em->flush();
-
-            if ($status == 1)
-            {
-                $str    = 'activated';
-                $status = 0;
-            }
-            else
-            {
-                $str    = 'disabled';
-                $status = 1;
-            }
-
-            $response->setData([
-                'message' => '"' . $link->getUrl() . '" ' . $str . ' successfully.',
-                'status'  => $status,
-                'type'    => 'success',
-                'url'     => $router->generate('admin_links_edit', [
-                    'id'     => $id,
-                    'status' => $status
-                ])
-            ]);
+            $str    = 'disabled';
+            $status = 1;
         }
+
+        $response = new JsonResponse();
+
+        $response->setData([
+            'message' => '"' . $link->getUrl() . '" ' . $str . ' successfully.',
+            'status'  => $status,
+            'type'    => 'success',
+            'url'     => $router->generate('admin_links_edit', [
+                'id'     => $link->getId(),
+                'status' => $status
+            ])
+        ]);
 
         return $response;
     }
