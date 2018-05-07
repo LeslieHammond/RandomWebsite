@@ -9,7 +9,11 @@
 <img src="{{ link.getLinkDetails().getImage() }}">
 <p><a id="linkButton" href="{{ path('front_redirectPage', { 'id': link.getId() }) }}" target="_blank">CTA</a></p>
 <p><a href="{{ path('front_addLink') }}">add link</a></p>
+<div id="app">
+
+</div>
 {% endblock %}
 
 {% block javascripts %}
+<script src="{{ asset('build/main.js') }}"></script>
 {% endblock %}
