@@ -14,7 +14,9 @@
     <body>
         <div class="container" id="bodyWrapper">
             {{ include('front/flashMessages.html.twig') }}
-            {% block body %}block body{% endblock %}
+            <div id="app">
+              {% block body %}block body{% endblock %}
+            </div>
         </div>
         {% block javascripts %}{% endblock %}
     </body>

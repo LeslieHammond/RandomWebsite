@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    Wehe Vu! {{ test }}
+    Wehe Vue! {{ test }}
   </div>
 </template>
 

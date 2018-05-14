@@ -24,7 +24,7 @@ class IndexController extends Controller
     public function index(Links $links)
     {
         $link = $links->getRandomLink();
-
+        
         return $this->render('front/index/index.html.twig', [
             'link' => $link
         ]);
